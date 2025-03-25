@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eco-Guru | Sustainable Eco-Friendly Products</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         /* ===== Global Styles ===== */
         :root {
@@ -14,108 +15,61 @@
             --dark-text: #333333;
             --light-text: #ffffff;
             --gray-bg: #f8f9fa;
-            --section-padding: 80px 0;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            cursor: none;
         }
         
         body {
+            font-family: 'Poppins', sans-serif;
             color: var(--dark-text);
-            line-height: 1.6;
             overflow-x: hidden;
-            background-color: #f9f9f9;
-        }
-        
-        a, button {
-            cursor: none;
+            padding-top: 80px;
         }
         
         .container {
-            width: 85%;
-            max-width: 1200px;
+            width: 90%;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 20px;
         }
         
-        /* ===== Custom Cursor ===== */
-        .cursor {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--primary-green);
-            position: fixed;
-            pointer-events: none;
-            mix-blend-mode: difference;
-            z-index: 9999;
-            transition: transform 0.2s ease;
-        }
-        
-        .cursor-follower {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--accent-gold);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
-            transition: transform 0.4s ease, width 0.3s ease, height 0.3s ease;
-        }
-        
-        /* ===== Leaf Background Animation ===== */
-        .leaf {
-            position: absolute;
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.6;
-            z-index: -1;
-            animation: falling linear infinite;
-        }
-        
-        @keyframes falling {
-            0% {
-                transform: translate(0, -10%) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translate(var(--random-x), 100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* ===== Navbar Styles ===== */
+        /* ===== Premium Navbar with Menu Items ===== */
         .navbar {
-            background-color: var(--primary-green);
-            padding: 20px 0;
-            position: sticky;
+            background-color: rgba(46, 139, 87, 0.98);
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            height: 80px;
         }
         
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 100%;
+            position: relative;
         }
         
         .logo {
             color: var(--light-text);
+            font-family: 'Playfair Display', serif;
             font-size: 28px;
             font-weight: 700;
             text-decoration: none;
             display: flex;
             align-items: center;
+            transition: var(--transition);
+            z-index: 1001;
         }
         
         .logo span {
@@ -123,28 +77,68 @@
             margin-left: 5px;
         }
         
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 5px;
+            height: 100%;
         }
         
-        .nav-links a {
+        .nav-links > li {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links > li > a {
             color: var(--light-text);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            padding: 8px 12px;
-            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px 18px;
+            border-radius: 6px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            height: 100%;
+            position: relative;
         }
         
-        .nav-links a:hover {
+        .nav-links > li > a::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 18px;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-gold);
+            transition: var(--transition);
+        }
+        
+        .nav-links > li > a:hover::after {
+            width: calc(100% - 36px);
+        }
+        
+        .nav-links > li > a:hover {
             color: var(--accent-gold);
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.08);
         }
         
-        /* ===== Dropdown Styles ===== */
+        /* Main Menu Items */
+        .main-menu-item > a {
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* ===== Dropdown Menus with Images ===== */
         .dropdown {
             position: relative;
         }
@@ -152,7 +146,7 @@
         .dropdown > a {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
         
         .dropdown-content {
@@ -160,15 +154,18 @@
             top: 100%;
             left: 0;
             background-color: white;
-            min-width: 220px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 6px;
+            min-width: 800px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
             z-index: 100;
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            padding: 15px 0;
+            transform: translateY(15px);
+            transition: var(--transition);
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
         
         .dropdown:hover .dropdown-content {
@@ -178,31 +175,69 @@
         }
         
         .dropdown-section {
-            padding: 0 15px;
-            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .dropdown-section:hover {
+            transform: translateY(-5px);
         }
         
         .dropdown-section h4 {
             color: var(--primary-green);
-            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
             text-transform: uppercase;
-            margin-bottom: 8px;
-            padding-bottom: 5px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
             border-bottom: 1px solid #eee;
+            letter-spacing: 1px;
         }
         
-        .dropdown-content a {
+        .dropdown-img {
+            height: 120px;
+            overflow: hidden;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .dropdown-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .dropdown-section:hover .dropdown-img img {
+            transform: scale(1.08);
+        }
+        
+        .dropdown-links {
+            list-style: none;
+        }
+        
+        .dropdown-links li {
+            margin-bottom: 8px;
+        }
+        
+        .dropdown-links a {
             color: var(--dark-text);
-            display: block;
-            padding: 8px 20px;
+            text-decoration: none;
             font-size: 14px;
-            transition: all 0.2s;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: block;
+            transition: var(--transition);
+            font-weight: 500;
         }
         
-        .dropdown-content a:hover {
+        .dropdown-links a:hover {
             color: var(--primary-green);
-            background-color: #f5f5f5;
-            padding-left: 25px;
+            background-color: #f5faf7;
+            padding-left: 16px;
         }
         
         /* ===== Nav Icons ===== */
@@ -219,16 +254,23 @@
         .search-box input {
             padding: 10px 15px;
             padding-right: 40px;
-            border-radius: 20px;
+            border-radius: 30px;
             border: none;
             outline: none;
-            width: 200px;
+            width: 180px;
             font-size: 14px;
-            transition: all 0.3s;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
         }
         
         .search-box input:focus {
             width: 220px;
+            background-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0 0 0 2px var(--accent-gold);
         }
         
@@ -237,7 +279,7 @@
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #777;
+            color: rgba(255, 255, 255, 0.8);
             cursor: pointer;
         }
         
@@ -245,11 +287,12 @@
             color: var(--light-text);
             font-size: 18px;
             position: relative;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
         
         .cart-icon:hover {
             color: var(--accent-gold);
+            transform: translateY(-2px);
         }
         
         .cart-count {
@@ -268,181 +311,109 @@
             font-weight: bold;
         }
         
-        /* ===== Hero Section ===== */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), 
-                        url('https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'));
-            background-size: cover;
-            background-position: center;
-            height: 600px;
-            display: flex;
-            align-items: center;
-            color: var(--light-text);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 50%, transparent 0%, rgba(0,0,0,0.7) 100%);
-            z-index: 0;
-        }
-        
-        .hero-content {
-            max-width: 600px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-gold);
-            color: var(--dark-text);
-            padding: 14px 32px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s;
+        .menu-toggle {
+            display: none;
+            background: none;
             border: none;
-            position: relative;
-            overflow: hidden;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
         }
         
-        .btn:hover {
-            background-color: #e8c252;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        /* ===== Mobile Responsiveness ===== */
+        @media (max-width: 1200px) {
+            .dropdown-content {
+                min-width: 700px;
+            }
         }
         
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
+        @media (max-width: 992px) {
+            .navbar {
+                height: 70px;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--primary-green);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 20px;
+                transition: var(--transition);
+                overflow-y: auto;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links > li {
+                width: 100%;
+                height: auto;
+                margin-bottom: 15px;
+            }
+            
+            .nav-links > li > a {
+                width: 100%;
+                justify-content: center;
+                padding: 15px;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            .dropdown-content {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+                background-color: rgba(0, 0, 0, 0.1);
+                padding: 15px;
+                min-width: auto;
+                grid-template-columns: 1fr;
+            }
+            
+            .dropdown.active .dropdown-content {
+                display: grid;
+            }
+            
+            .dropdown-img {
+                height: 100px;
+            }
+            
+            .search-box input {
+                width: 150px;
+            }
         }
         
-        .btn:hover::before {
-            left: 100%;
-        }
-        
-        /* ===== Featured Categories ===== */
-        .categories {
-            padding: var(--section-padding);
-            background-color: var(--gray-bg);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--primary-green);
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            color: #666;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        
-        .category-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-            position: relative;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .category-img {
-            height: 250px;
-            overflow: hidden;
-        }
-        
-        .category-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .category-card:hover .category-img img {
-            transform: scale(1.05);
-        }
-        
-        .category-info {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .category-info h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--primary-green);
-        }
-        
-        .category-info p {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 14px;
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 24px;
+            }
+            
+            .search-box input {
+                width: 120px;
+                padding: 8px 12px;
+            }
+            
+            .dropdown-content {
+                padding: 10px;
+            }
         }
         
         /* ===== Eco Footer ===== */
         footer {
             background-color: #1a2e22;
             color: #d1e7dd;
-            padding: 80px 0 0;
+            padding: 60px 0 20px;
             position: relative;
-            overflow: hidden;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 15px;
-            background: linear-gradient(90deg, var(--primary-green), var(--accent-gold), var(--primary-green));
+            margin-top: 60px;
         }
         
         .footer-wave {
@@ -457,11 +428,9 @@
         
         .footer-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
         }
         
         .footer-col h3 {
@@ -576,96 +545,110 @@
             padding: 20px 0;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 14px;
-            position: relative;
-            z-index: 1;
         }
         
-        .footer-bottom p {
-            margin-bottom: 0;
-        }
-        
-        .footer-leaf {
+        /* ===== Preload Images ===== */
+        body::after {
             position: absolute;
-            opacity: 0.1;
-            z-index: 0;
-        }
-        
-        .footer-leaf-1 {
-            top: 50%;
-            left: 10%;
-            width: 100px;
-            transform: rotate(45deg);
-        }
-        
-        .footer-leaf-2 {
-            bottom: 20%;
-            right: 15%;
-            width: 80px;
-            transform: rotate(-20deg);
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            z-index: -1;
+            content: url('https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')
+                     url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')
+                     url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')
+                     url('https://images.unsplash.com/photo-1597362925123-77861d3fbac7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')
+                     url('https://images.unsplash.com/photo-1550565118-3a14e8d0386f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80')
+                     url('https://images.unsplash.com/photo-1583947581924-a6d4a7e917b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
         }
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
-    
-    <!-- Leaf Background Elements -->
-    <div id="leaf-container"></div>
-    
-    <!-- Navigation Bar -->
+    <!-- Navigation Bar with Menu Items -->
     <nav class="navbar">
         <div class="container nav-container">
             <a href="#" class="logo">Eco-<span>Guru</span></a>
             
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
+                <li class="main-menu-item"><a href="#">Home</a></li>
                 
-                <li class="dropdown">
-                    <a href="#">Shop by Category <i class="fas fa-chevron-down"></i></a>
+                <li class="dropdown main-menu-item">
+                    <a href="#">Shop <i class="fas fa-chevron-down"></i></a>
                     <div class="dropdown-content">
                         <div class="dropdown-section">
+                            <div class="dropdown-img">
+                                <img src="https://images.unsplash.com/photo-1597362925123-77861d3fbac7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Eco Tableware" loading="lazy">
+                            </div>
                             <h4>Eco Tableware</h4>
-                            <a href="#">Bagasse Plates & Bowls</a>
-                            <a href="#">Areca Leaf Plates</a>
-                            <a href="#">Palm Leaf Plates</a>
-                            <a href="#">Wooden Cutlery</a>
+                            <ul class="dropdown-links">
+                                <li><a href="#">Bagasse Plates & Bowls</a></li>
+                                <li><a href="#">Areca Leaf Plates</a></li>
+                                <li><a href="#">Palm Leaf Plates</a></li>
+                                <li><a href="#">Wooden Cutlery Sets</a></li>
+                                <li><a href="#">Bamboo Dinnerware</a></li>
+                            </ul>
                         </div>
+                        
                         <div class="dropdown-section">
+                            <div class="dropdown-img">
+                                <img src="https://images.unsplash.com/photo-1550565118-3a14e8d0386f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Reusable Bags" loading="lazy">
+                            </div>
                             <h4>Reusable Bags</h4>
-                            <a href="#">Organic Cotton Totes</a>
-                            <a href="#">Hemp/Jute Bags</a>
-                            <a href="#">Paper Bags (Grocery/Gift)</a>
+                            <ul class="dropdown-links">
+                                <li><a href="#">Organic Cotton Totes</a></li>
+                                <li><a href="#">Hemp/Jute Shopping Bags</a></li>
+                                <li><a href="#">Paper Bags (Grocery/Gift)</a></li>
+                                <li><a href="#">Mesh Produce Bags</a></li>
+                                <li><a href="#">Recycled PET Bags</a></li>
+                            </ul>
                         </div>
+                        
                         <div class="dropdown-section">
+                            <div class="dropdown-img">
+                                <img src="https://images.unsplash.com/photo-1583947581924-a6d4a7e917b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Biodegradables" loading="lazy">
+                            </div>
                             <h4>Biodegradables</h4>
-                            <a href="#">Paper Straws</a>
-                            <a href="#">Compostable Packaging</a>
+                            <ul class="dropdown-links">
+                                <li><a href="#">Paper Straws</a></li>
+                                <li><a href="#">Compostable Packaging</a></li>
+                                <li><a href="#">Plant-based Cutlery</a></li>
+                                <li><a href="#">Eco-Friendly Food Wraps</a></li>
+                                <li><a href="#">Natural Fiber Containers</a></li>
+                            </ul>
                         </div>
                     </div>
                 </li>
                 
-                <li><a href="#">Bulk Orders</a></li>
+                <li class="main-menu-item"><a href="#">Products</a></li>
                 
-                <li class="dropdown">
+                <li class="dropdown main-menu-item">
                     <a href="#">Sustainability <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Our Mission</a>
-                        <a href="#">Eco-Impact</a>
-                        <a href="#">Certifications</a>
+                    <div class="dropdown-content" style="min-width: 300px; grid-template-columns: 1fr;">
+                        <div class="dropdown-section">
+                            <div class="dropdown-img">
+                                <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Sustainability" loading="lazy">
+                            </div>
+                            <h4>Our Eco Mission</h4>
+                            <ul class="dropdown-links">
+                                <li><a href="#">Our Story</a></li>
+                                <li><a href="#">Eco-Impact Metrics</a></li>
+                                <li><a href="#">Certifications</a></li>
+                                <li><a href="#">Green Initiatives</a></li>
+                                <li><a href="#">Partnerships</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </li>
                 
-                <li class="dropdown">
-                    <a href="#">Blog <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">Zero-Waste Living Tips</a>
-                        <a href="#">Product Guides</a>
-                        <a href="#">DIY Eco-Hacks</a>
-                    </div>
-                </li>
+                <li class="main-menu-item"><a href="#">About Us</a></li>
                 
-                <li><a href="#">Contact Us</a></li>
+                <li class="main-menu-item"><a href="#">Blog</a></li>
+                
+                <li class="main-menu-item"><a href="#">Contact</a></li>
             </ul>
             
             <div class="nav-icons">
@@ -681,61 +664,11 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Premium Eco-Friendly Products for Sustainable Living</h1>
-                <p>Discover our carefully curated selection of biodegradable and reusable alternatives that help reduce your environmental footprint without compromising on quality.</p>
-                <a href="#" class="btn">Explore Collection</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Categories -->
-    <section class="categories">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Eco-Friendly Collections</h2>
-                <p>Browse through our sustainable product categories designed to replace single-use plastics in your daily life</p>
-            </div>
-            
-            <div class="category-grid">
-                <div class="category-card">
-                    <div class="category-img">
-                        <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Eco Tableware">
-                    </div>
-                    <div class="category-info">
-                        <h3>Eco Tableware</h3>
-                        <p>Biodegradable plates, bowls and cutlery for sustainable dining</p>
-                        <a href="#" class="btn">Shop Now</a>
-                    </div>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-img">
-                        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Reusable Bags">
-                    </div>
-                    <div class="category-info">
-                        <h3>Reusable Bags</h3>
-                        <p>Stylish and durable alternatives to plastic bags</p>
-                        <a href="#" class="btn">Shop Now</a>
-                    </div>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-img">
-                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Biodegradables">
-                    </div>
-                    <div class="category-info">
-                        <h3>Biodegradables</h3>
-                        <p>Compostable straws and packaging solutions</p>
-                        <a href="#" class="btn">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main class="container">
+        <h1 style="margin: 40px 0; text-align: center;">Welcome to Eco-Guru</h1>
+        <p style="text-align: center;">Your destination for sustainable living products</p>
+    </main>
 
     <!-- Eco Footer -->
     <footer>
@@ -787,86 +720,56 @@
                 <p>&copy; 2023 Eco-Guru. All Rights Reserved. <span style="color: var(--accent-gold);">♻</span> Proudly Sustainable</p>
             </div>
         </div>
-        
-        <!-- Decorative leaves -->
-        <img src="https://www.freepnglogos.com/uploads/leaf-png/leaf-png-transparent-images-png-only-28.png" class="footer-leaf footer-leaf-1" alt="leaf">
-        <img src="https://www.freepnglogos.com/uploads/leaf-png/leaf-png-transparent-images-png-only-28.png" class="footer-leaf footer-leaf-2" alt="leaf">
     </footer>
 
     <script>
-        // Custom Cursor Effect
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
         
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX - 20 + 'px';
-                cursorFollower.style.top = e.clientY - 20 + 'px';
-            }, 100);
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
         
-        // Interactive cursor effects
-        const hoverElements = document.querySelectorAll('a, button, .dropdown, .category-card');
-        
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursorFollower.style.transform = 'scale(0.5)';
-                cursorFollower.style.backgroundColor = 'rgba(212, 175, 55, 0.3)';
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursorFollower.style.transform = 'scale(1)';
-                cursorFollower.style.backgroundColor = 'transparent';
+        // Dropdown functionality for mobile
+        document.querySelectorAll('.dropdown > a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    const dropdown = this.parentElement;
+                    dropdown.classList.toggle('active');
+                    
+                    // Close other dropdowns
+                    document.querySelectorAll('.dropdown').forEach(item => {
+                        if (item !== dropdown) {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
             });
         });
         
-        // Leaf Background Animation
-        const leafContainer = document.getElementById('leaf-container');
-        const leafImages = [
-            'https://www.freepnglogos.com/uploads/leaf-png/leaf-png-transparent-images-png-only-28.png',
-            'https://www.freepnglogos.com/uploads/leaf-png/green-leaf-png-transparent-26.png',
-            'https://www.freepnglogos.com/uploads/leaf-png/leaf-png-transparent-images-png-only-28.png'
-        ];
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992 && !e.target.closest('.dropdown') && !e.target.closest('.menu-toggle')) {
+                document.querySelectorAll('.dropdown').forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
         
-        function createLeaf() {
-            const leaf = document.createElement('div');
-            leaf.className = 'leaf';
-            
-            // Random leaf image
-            const randomLeaf = leafImages[Math.floor(Math.random() * leafImages.length)];
-            leaf.style.backgroundImage = `url('${randomLeaf}')`;
-            
-            // Random position and size
-            const size = Math.random() * 30 + 20;
-            leaf.style.width = `${size}px`;
-            leaf.style.height = `${size}px`;
-            leaf.style.left = `${Math.random() * 100}vw`;
-            leaf.style.setProperty('--random-x', `${Math.random() * 100 - 50}px`);
-            
-            // Random animation duration
-            const duration = Math.random() * 10 + 5;
-            leaf.style.animationDuration = `${duration}s`;
-            
-            leafContainer.appendChild(leaf);
-            
-            // Remove leaf after animation completes
-            setTimeout(() => {
-                leaf.remove();
-            }, duration * 1000);
-        }
-        
-        // Create initial leaves
-        for (let i = 0; i < 10; i++) {
-            setTimeout(createLeaf, i * 1000);
-        }
-        
-        // Continue creating leaves
-        setInterval(createLeaf, 2000);
+        // Preload images for faster loading
+        window.addEventListener('load', function() {
+            const images = document.querySelectorAll('.dropdown-img img');
+            images.forEach(img => {
+                const src = img.getAttribute('src');
+                if (src) {
+                    new Image().src = src;
+                }
+            });
+        });
     </script>
 </body>
 </html>
