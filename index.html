@@ -3,318 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoFriendly - Sustainable Products</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Eco-Guru | Sustainable Eco-Friendly Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles */
+        /* ===== Global Styles ===== */
+        :root {
+            --primary-green: #2e8b57;
+            --light-green: #3cb371;
+            --accent-gold: #d4af37;
+            --dark-text: #333333;
+            --light-text: #ffffff;
+            --gray-bg: #f8f9fa;
+            --section-padding: 80px 0;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            cursor: none;
         }
         
         body {
-            background-color: #f9f9f9;
-            color: #333;
+            color: var(--dark-text);
             line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #f9f9f9;
         }
         
-        /* Navbar Styles */
+        a, button {
+            cursor: none;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* ===== Custom Cursor ===== */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--primary-green);
+            position: fixed;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+        }
+        
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.4s ease, width 0.3s ease, height 0.3s ease;
+        }
+        
+        /* ===== Leaf Background Animation ===== */
+        .leaf {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.6;
+            z-index: -1;
+            animation: falling linear infinite;
+        }
+        
+        @keyframes falling {
+            0% {
+                transform: translate(0, -10%) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translate(var(--random-x), 100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* ===== Navbar Styles ===== */
         .navbar {
-            background-color: #2e8b57;
-            padding: 1rem 2rem;
+            background-color: var(--primary-green);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .logo {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: bold;
+            color: var(--light-text);
+            font-size: 28px;
+            font-weight: 700;
             text-decoration: none;
+            display: flex;
+            align-items: center;
         }
         
         .logo span {
-            color: #ffd700;
+            color: var(--accent-gold);
+            margin-left: 5px;
         }
         
         .nav-links {
             display: flex;
             list-style: none;
-        }
-        
-        .nav-links li {
-            position: relative;
-            margin-left: 1.5rem;
+            gap: 30px;
         }
         
         .nav-links a {
-            color: white;
+            color: var(--light-text);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 4px;
         }
         
         .nav-links a:hover {
-            color: #ffd700;
+            color: var(--accent-gold);
+            background-color: rgba(255, 255, 255, 0.1);
         }
         
-        /* Dropdown Styles */
+        /* ===== Dropdown Styles ===== */
         .dropdown {
             position: relative;
         }
         
+        .dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
         .dropdown-content {
-            display: none;
             position: absolute;
-            background-color: white;
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
-            z-index: 1;
             top: 100%;
             left: 0;
+            background-color: white;
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            padding: 15px 0;
         }
         
         .dropdown:hover .dropdown-content {
-            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
         
-        .dropdown-content a {
-            color: #333;
-            padding: 12px 16px;
-            display: block;
+        .dropdown-section {
+            padding: 0 15px;
+            margin-bottom: 10px;
+        }
+        
+        .dropdown-section h4 {
+            color: var(--primary-green);
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
             border-bottom: 1px solid #eee;
         }
         
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-            color: #2e8b57;
+        .dropdown-content a {
+            color: var(--dark-text);
+            display: block;
+            padding: 8px 20px;
+            font-size: 14px;
+            transition: all 0.2s;
         }
         
-        /* Search and Cart */
+        .dropdown-content a:hover {
+            color: var(--primary-green);
+            background-color: #f5f5f5;
+            padding-left: 25px;
+        }
+        
+        /* ===== Nav Icons ===== */
         .nav-icons {
             display: flex;
             align-items: center;
+            gap: 20px;
         }
         
         .search-box {
             position: relative;
-            margin-right: 1rem;
         }
         
         .search-box input {
-            padding: 0.5rem 1rem;
+            padding: 10px 15px;
+            padding-right: 40px;
             border-radius: 20px;
             border: none;
             outline: none;
-            padding-right: 2.5rem;
+            width: 200px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            width: 220px;
+            box-shadow: 0 0 0 2px var(--accent-gold);
         }
         
         .search-icon {
             position: absolute;
-            right: 10px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             color: #777;
+            cursor: pointer;
         }
         
         .cart-icon {
-            color: white;
-            font-size: 1.3rem;
+            color: var(--light-text);
+            font-size: 18px;
             position: relative;
+            transition: all 0.3s;
+        }
+        
+        .cart-icon:hover {
+            color: var(--accent-gold);
         }
         
         .cart-count {
             position: absolute;
             top: -8px;
             right: -8px;
-            background-color: #ffd700;
-            color: #333;
+            background-color: var(--accent-gold);
+            color: var(--dark-text);
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0.7rem;
+            font-size: 11px;
             font-weight: bold;
         }
         
-        /* Mobile Menu */
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        /* Hero Section */
+        /* ===== Hero Section ===== */
         .hero {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.6), 
+                        url('https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'));
             background-size: cover;
             background-position: center;
-            height: 80vh;
+            height: 600px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 2rem;
+            color: var(--light-text);
+            position: relative;
+            overflow: hidden;
         }
         
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, transparent 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 0;
         }
         
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
         
         .btn {
             display: inline-block;
-            background-color: #ffd700;
-            color: #333;
-            padding: 0.8rem 1.8rem;
+            background-color: var(--accent-gold);
+            color: var(--dark-text);
+            padding: 14px 32px;
             border-radius: 30px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 16px;
             transition: all 0.3s;
+            border: none;
+            position: relative;
+            overflow: hidden;
         }
         
         .btn:hover {
-            background-color: #2e8b57;
-            color: white;
+            background-color: #e8c252;
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
-        /* Responsive Styles */
-        @media (max-width: 992px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                background-color: #2e8b57;
-                width: 100%;
-                height: calc(100vh - 70px);
-                flex-direction: column;
-                align-items: center;
-                padding-top: 2rem;
-                transition: all 0.5s ease;
-            }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links li {
-                margin: 1rem 0;
-            }
-            
-            .dropdown-content {
-                position: static;
-                display: none;
-                width: 100%;
-                box-shadow: none;
-                background-color: rgba(0, 0, 0, 0.1);
-            }
-            
-            .dropdown:hover .dropdown-content {
-                display: none;
-            }
-            
-            .dropdown.active .dropdown-content {
-                display: block;
-            }
-            
-            .menu-toggle {
-                display: block;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        /* ===== Featured Categories ===== */
+        .categories {
+            padding: var(--section-padding);
+            background-color: var(--gray-bg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover .category-img img {
+            transform: scale(1.05);
+        }
+        
+        .category-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .category-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+        
+        .category-info p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        /* ===== Eco Footer ===== */
+        footer {
+            background-color: #1a2e22;
+            color: #d1e7dd;
+            padding: 80px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-gold), var(--primary-green));
+        }
+        
+        .footer-wave {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23f8f9fa" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23f8f9fa" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f8f9fa"/></svg>');
+            background-size: cover;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-col h3 {
+            color: var(--accent-gold);
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--light-green);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-col ul li i {
+            color: var(--light-green);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-col ul li a {
+            color: #d1e7dd;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            font-size: 14px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent-gold);
+            transform: translateX(5px);
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #d1e7dd;
+            transition: all 0.3s;
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--accent-gold);
+            color: #1a2e22;
+            transform: translateY(-3px);
+        }
+        
+        .footer-newsletter input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 4px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .footer-newsletter input::placeholder {
+            color: #a3c9b8;
+        }
+        
+        .footer-newsletter button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--accent-gold);
+            color: #1a2e22;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .footer-newsletter button:hover {
+            background-color: #e8c252;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-bottom p {
+            margin-bottom: 0;
+        }
+        
+        .footer-leaf {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .footer-leaf-1 {
+            top: 50%;
+            left: 10%;
+            width: 100px;
+            transform: rotate(45deg);
+        }
+        
+        .footer-leaf-2 {
+            bottom: 20%;
+            right: 15%;
+            width: 80px;
+            transform: rotate(-20deg);
         }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Leaf Background Elements -->
+    <div id="leaf-container"></div>
+    
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <a href="#" class="logo">Eco<span>Friendly</span></a>
-        
-        <div class="menu-toggle">
-            <i class="fas fa-bars"></i>
-        </div>
-        
-        <ul class="nav-links">
-            <li><a href="#">Home</a></li>
+        <div class="container nav-container">
+            <a href="#" class="logo">Eco-<span>Guru</span></a>
             
-            <li class="dropdown">
-                <a href="#">Shop by Category <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-content">
-                    <div class="dropdown-section">
-                        <h4>Eco Tableware</h4>
-                        <a href="#">Bagasse Plates & Bowls</a>
-                        <a href="#">Areca Leaf Plates</a>
-                        <a href="#">Palm Leaf Plates</a>
-                        <a href="#">Wooden Cutlery</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                
+                <li class="dropdown">
+                    <a href="#">Shop by Category <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <div class="dropdown-section">
+                            <h4>Eco Tableware</h4>
+                            <a href="#">Bagasse Plates & Bowls</a>
+                            <a href="#">Areca Leaf Plates</a>
+                            <a href="#">Palm Leaf Plates</a>
+                            <a href="#">Wooden Cutlery</a>
+                        </div>
+                        <div class="dropdown-section">
+                            <h4>Reusable Bags</h4>
+                            <a href="#">Organic Cotton Totes</a>
+                            <a href="#">Hemp/Jute Bags</a>
+                            <a href="#">Paper Bags (Grocery/Gift)</a>
+                        </div>
+                        <div class="dropdown-section">
+                            <h4>Biodegradables</h4>
+                            <a href="#">Paper Straws</a>
+                            <a href="#">Compostable Packaging</a>
+                        </div>
                     </div>
-                    <div class="dropdown-section">
-                        <h4>Reusable Bags</h4>
-                        <a href="#">Organic Cotton Totes</a>
-                        <a href="#">Hemp/Jute Bags</a>
-                        <a href="#">Paper Bags (Grocery/Gift)</a>
+                </li>
+                
+                <li><a href="#">Bulk Orders</a></li>
+                
+                <li class="dropdown">
+                    <a href="#">Sustainability <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Our Mission</a>
+                        <a href="#">Eco-Impact</a>
+                        <a href="#">Certifications</a>
                     </div>
-                    <div class="dropdown-section">
-                        <h4>Biodegradables</h4>
-                        <a href="#">Paper Straws</a>
-                        <a href="#">Compostable Packaging</a>
+                </li>
+                
+                <li class="dropdown">
+                    <a href="#">Blog <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Zero-Waste Living Tips</a>
+                        <a href="#">Product Guides</a>
+                        <a href="#">DIY Eco-Hacks</a>
                     </div>
-                </div>
-            </li>
-            
-            <li><a href="#">Bulk Orders</a></li>
-            
-            <li class="dropdown">
-                <a href="#">Sustainability <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-content">
-                    <a href="#">Our Mission</a>
-                    <a href="#">Eco-Impact</a>
-                    <a href="#">Certifications</a>
-                </div>
-            </li>
-            
-            <li class="dropdown">
-                <a href="#">Blog <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-content">
-                    <a href="#">Zero-Waste Living Tips</a>
-                    <a href="#">Product Guides</a>
-                    <a href="#">DIY Eco-Hacks</a>
-                </div>
-            </li>
-            
-            <li class="dropdown">
-                <a href="#">Contact Us <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-content">
-                    <a href="#">Email/Phone</a>
-                    <a href="#">Wholesale Inquiries</a>
-                    <a href="#">FAQ</a>
-                </div>
-            </li>
+                </li>
+                
+                <li><a href="#">Contact Us</a></li>
+            </ul>
             
             <div class="nav-icons">
                 <div class="search-box">
-                    <input type="text" placeholder="Search...">
+                    <input type="text" placeholder="Search products...">
                     <i class="fas fa-search search-icon"></i>
                 </div>
                 <a href="#" class="cart-icon">
@@ -322,39 +678,195 @@
                     <span class="cart-count">0</span>
                 </a>
             </div>
-        </ul>
+        </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Sustainable Living Starts Here</h1>
-            <p>Discover our eco-friendly products that help reduce waste and protect our planet. Join the movement towards a greener future.</p>
-            <a href="#" class="btn">Shop Now</a>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Premium Eco-Friendly Products for Sustainable Living</h1>
+                <p>Discover our carefully curated selection of biodegradable and reusable alternatives that help reduce your environmental footprint without compromising on quality.</p>
+                <a href="#" class="btn">Explore Collection</a>
+            </div>
         </div>
     </section>
 
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        const dropdowns = document.querySelectorAll('.dropdown');
+    <!-- Featured Categories -->
+    <section class="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Eco-Friendly Collections</h2>
+                <p>Browse through our sustainable product categories designed to replace single-use plastics in your daily life</p>
+            </div>
+            
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Eco Tableware">
+                    </div>
+                    <div class="category-info">
+                        <h3>Eco Tableware</h3>
+                        <p>Biodegradable plates, bowls and cutlery for sustainable dining</p>
+                        <a href="#" class="btn">Shop Now</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Reusable Bags">
+                    </div>
+                    <div class="category-info">
+                        <h3>Reusable Bags</h3>
+                        <p>Stylish and durable alternatives to plastic bags</p>
+                        <a href="#" class="btn">Shop Now</a>
+                    </div>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Biodegradables">
+                    </div>
+                    <div class="category-info">
+                        <h3>Biodegradables</h3>
+                        <p>Compostable straws and packaging solutions</p>
+                        <a href="#" class="btn">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eco Footer -->
+    <footer>
+        <div class="footer-wave"></div>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col footer-about">
+                    <h3>Eco-Guru</h3>
+                    <p>Your trusted partner in sustainable living. We provide premium eco-friendly alternatives to help you reduce waste and protect our planet.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-leaf"></i> About Us</a></li>
+                        <li><a href="#"><i class="fas fa-shopping-bag"></i> Our Products</a></li>
+                        <li><a href="#"><i class="fas fa-globe"></i> Sustainability</a></li>
+                        <li><a href="#"><i class="fas fa-pen"></i> Blog</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> FAQs</a></li>
+                        <li><a href="#"><i class="fas fa-truck"></i> Shipping Policy</a></li>
+                        <li><a href="#"><i class="fas fa-exchange-alt"></i> Returns & Refunds</a></li>
+                        <li><a href="#"><i class="fas fa-users"></i> Wholesale Inquiries</a></li>
+                        <li><a href="#"><i class="fas fa-lock"></i> Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col footer-newsletter">
+                    <h3>Earth Newsletter</h3>
+                    <p>Subscribe for eco-tips, product updates, and special offers.</p>
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit">Subscribe</button>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Eco-Guru. All Rights Reserved. <span style="color: var(--accent-gold);">♻</span> Proudly Sustainable</p>
+            </div>
+        </div>
         
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        <!-- Decorative leaves -->
+        <img src="https://www.freepnglogos.com/uploads/leaf-png/leaf-png-transparent-images-png-only-28.png" class="footer-leaf footer-leaf-1" alt="leaf">
+        <img src="https://www.freepnglogos.com/uploads/leaf-png/leaf-png-transparent-images-png-only-28.png" class="footer-leaf footer-leaf-2" alt="leaf">
+    </footer>
+
+    <script>
+        // Custom Cursor Effect
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX - 20 + 'px';
+                cursorFollower.style.top = e.clientY - 20 + 'px';
+            }, 100);
         });
         
-        // Mobile Dropdown Toggle
-        dropdowns.forEach(dropdown => {
-            const link = dropdown.querySelector('a');
+        // Interactive cursor effects
+        const hoverElements = document.querySelectorAll('a, button, .dropdown, .category-card');
+        
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursorFollower.style.transform = 'scale(0.5)';
+                cursorFollower.style.backgroundColor = 'rgba(212, 175, 55, 0.3)';
+            });
             
-            link.addEventListener('click', (e) => {
-                if (window.innerWidth <= 992) {
-                    e.preventDefault();
-                    dropdown.classList.toggle('active');
-                }
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursorFollower.style.transform = 'scale(1)';
+                cursorFollower.style.backgroundColor = 'transparent';
             });
         });
+        
+        // Leaf Background Animation
+        const leafContainer = document.getElementById('leaf-container');
+        const leafImages = [
+            'https://www.freepnglogos.com/uploads/leaf-png/leaf-png-transparent-images-png-only-28.png',
+            'https://www.freepnglogos.com/uploads/leaf-png/green-leaf-png-transparent-26.png',
+            'https://www.freepnglogos.com/uploads/leaf-png/leaf-png-transparent-images-png-only-28.png'
+        ];
+        
+        function createLeaf() {
+            const leaf = document.createElement('div');
+            leaf.className = 'leaf';
+            
+            // Random leaf image
+            const randomLeaf = leafImages[Math.floor(Math.random() * leafImages.length)];
+            leaf.style.backgroundImage = `url('${randomLeaf}')`;
+            
+            // Random position and size
+            const size = Math.random() * 30 + 20;
+            leaf.style.width = `${size}px`;
+            leaf.style.height = `${size}px`;
+            leaf.style.left = `${Math.random() * 100}vw`;
+            leaf.style.setProperty('--random-x', `${Math.random() * 100 - 50}px`);
+            
+            // Random animation duration
+            const duration = Math.random() * 10 + 5;
+            leaf.style.animationDuration = `${duration}s`;
+            
+            leafContainer.appendChild(leaf);
+            
+            // Remove leaf after animation completes
+            setTimeout(() => {
+                leaf.remove();
+            }, duration * 1000);
+        }
+        
+        // Create initial leaves
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createLeaf, i * 1000);
+        }
+        
+        // Continue creating leaves
+        setInterval(createLeaf, 2000);
     </script>
 </body>
 </html>
