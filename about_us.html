@@ -41,15 +41,12 @@
         
         /* ===== Navbar Styles ===== */
         .navbar {
-            background-color: rgba(46, 139, 87, 0.98);
+            background-color: var(--primary-green);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             height: 80px;
         }
         
@@ -140,7 +137,138 @@
             width: calc(100% - 36px);
         }
         
-        /* Dropdown and other navbar styles remain the same as your main page */
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 300px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 10px 10px;
+            padding: 20px;
+            z-index: 1000;
+            flex-direction: column;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: flex;
+        }
+        
+        .dropdown-section {
+            margin-bottom: 15px;
+        }
+        
+        .dropdown-section h4 {
+            color: var(--primary-green);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dropdown-links {
+            list-style: none;
+        }
+        
+        .dropdown-links li a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 0;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .dropdown-links li a:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
+        }
+        
+        /* Nav icons */
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-box input {
+            width: 0;
+            padding: 0;
+            border: none;
+            border-radius: 20px;
+            transition: var(--transition);
+            background-color: transparent;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .search-box input:focus {
+            width: 180px;
+            padding: 8px 15px 8px 35px;
+            background-color: rgba(255, 255, 255, 0.2);
+            outline: none;
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .cart-icon {
+            position: relative;
+            color: white;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .cart-icon:hover {
+            color: var(--accent-gold);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-gold);
+            color: var(--primary-green);
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
         
         /* ===== About Us Page Specific Styles ===== */
         .about-header {
@@ -159,6 +287,7 @@
         .about-header-content {
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 20px;
         }
         
         .about-header h1 {
@@ -166,6 +295,30 @@
             font-size: 3rem;
             margin-bottom: 20px;
             color: var(--accent-gold);
+        }
+        
+        .about-header p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .mission-container {
@@ -194,6 +347,11 @@
             background-color: var(--accent-gold);
         }
         
+        .mission-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
         .mission-image {
             border-radius: 10px;
             overflow: hidden;
@@ -217,6 +375,7 @@
             position: relative;
             max-width: 800px;
             margin: 0 auto;
+            padding: 40px 0;
         }
         
         .timeline::before {
@@ -235,6 +394,8 @@
             position: relative;
             width: 50%;
             box-sizing: border-box;
+            opacity: 0;
+            transform: translateY(20px);
         }
         
         .timeline-item:nth-child(odd) {
@@ -282,6 +443,10 @@
             font-size: 1.3rem;
             color: var(--primary-green);
             margin-bottom: 15px;
+        }
+        
+        .timeline-content p {
+            line-height: 1.6;
         }
         
         /* Team Section */
@@ -333,11 +498,27 @@
             margin-bottom: 5px;
         }
         
+        .member-name a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .member-name a:hover {
+            color: var(--accent-gold);
+            text-decoration: underline;
+        }
+        
         .member-position {
             color: var(--accent-gold);
             font-weight: 600;
             margin-bottom: 15px;
             font-size: 0.9rem;
+        }
+        
+        .member-bio {
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
         
         /* Values Section */
@@ -375,6 +556,18 @@
             color: var(--primary-green);
             margin-bottom: 20px;
             transition: all 0.3s;
+        }
+        
+        .value-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+            transition: all 0.3s;
+        }
+        
+        .value-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         
         /* ===== Footer Styles ===== */
@@ -554,6 +747,45 @@
                 background-color: rgba(255, 255, 255, 0.1);
             }
             
+            .dropdown-content {
+                position: static;
+                display: none;
+                width: 100%;
+                box-shadow: none;
+                padding: 15px 0 0 20px;
+                background-color: transparent;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+            
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+            
+            .dropdown-section h4 {
+                color: var(--accent-gold);
+                border-bottom-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            .dropdown-links li a {
+                color: rgba(255, 255, 255, 0.8);
+            }
+            
+            .dropdown-links li a:hover {
+                color: white;
+            }
+            
+            .nav-icons {
+                margin-left: auto;
+                margin-right: 20px;
+            }
+            
+            .search-box input:focus {
+                width: 150px;
+            }
+            
             .mission-container {
                 grid-template-columns: 1fr;
             }
@@ -582,8 +814,44 @@
         }
         
         @media (max-width: 768px) {
+            .about-header {
+                height: 350px;
+            }
+            
             .about-header h1 {
                 font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .mission-content h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .about-header {
+                height: 300px;
+                margin-bottom: 40px;
+            }
+            
+            .about-header h1 {
+                font-size: 2rem;
+            }
+            
+            .about-header p {
+                font-size: 1rem;
+            }
+            
+            .mission-container {
+                gap: 30px;
+                margin-bottom: 50px;
+            }
+            
+            .values-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -658,7 +926,7 @@
                 <h2>Rooted in Sustainability, Growing for Tomorrow</h2>
                 <p>Eco-Guru began as a passionate response to the mountains of waste we saw overwhelming our planet. What started as a small collective of eco-enthusiasts in 2015 has blossomed into a movement that's replaced over 15 million plastic items with sustainable alternatives.</p>
                 <p>We're not just selling products - we're cultivating a revolution. Each bamboo toothbrush, palm leaf plate, and hemp tote in our collection represents a conscious choice to honor our planet while refusing to compromise on quality or style.</p>
-                <p>Our founder, Maya Greenfield, often says: "Sustainability shouldn't be a sacrifice - it should be a celebration of how ingenious nature's solutions truly are." This philosophy guides every decision we make at Eco-Guru.</p>
+                <p>Our founder, Devid Rabadiya, often says: "Sustainability shouldn't be a sacrifice - it should be a celebration of how ingenious nature's solutions truly are." This philosophy guides every decision we make at Eco-Guru.</p>
             </div>
             <div class="mission-image">
                 <img src="https://images.unsplash.com/photo-1520333789090-1afc82db536a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Eco-Guru team planting trees" loading="lazy">
@@ -720,21 +988,21 @@
         <div class="team-grid">
             <div class="team-member">
                 <div class="member-image">
-                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Maya Greenfield" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Devid Rabadiya" loading="lazy">
                 </div>
                 <div class="member-info">
-                    <h3 class="member-name">Maya Greenfield</h3>
+                    <h3 class="member-name"><a href="https://www.linkedin.com/in/devid-rabadiya-8295b61a9/?originalSubdomain=in" target="_blank">Devid Rabadiya</a></h3>
                     <div class="member-position">Founder & CEO</div>
-                    <p class="member-bio">Former environmental scientist who turned her passion for sustainability into a movement. Believes in "business as a force for regeneration."</p>
+                    <p class="member-bio">Former environmental scientist who turned his passion for sustainability into a movement. Believes in "business as a force for regeneration."</p>
                 </div>
             </div>
             
             <div class="team-member">
                 <div class="member-image">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Raj Patel" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Vivek Patel" loading="lazy">
                 </div>
                 <div class="member-info">
-                    <h3 class="member-name">Raj Patel</h3>
+                    <h3 class="member-name"><a href="https://www.linkedin.com/in/vivek-ghodasara-2a13bb101/?originalSubdomain=in" target="_blank">Vivek Patel</a></h3>
                     <div class="member-position">Head of Product Innovation</div>
                     <p class="member-bio">Material science expert who transforms agricultural waste into beautiful, functional products. Our resident "waste alchemist."</p>
                 </div>
@@ -742,10 +1010,10 @@
             
             <div class="team-member">
                 <div class="member-image">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Elena Rodriguez" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Jigar Varmora" loading="lazy">
                 </div>
                 <div class="member-info">
-                    <h3 class="member-name">Elena Rodriguez</h3>
+                    <h3 class="member-name"><a href="https://www.linkedin.com/in/jigar-varmora-570890129/" target="_blank">Jigar Varmora</a></h3>
                     <div class="member-position">Director of Sustainability</div>
                     <p class="member-bio">Ensures every aspect of our operations meets strict environmental standards. Our "green compass."</p>
                 </div>
@@ -851,6 +1119,7 @@
         // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
+        const dropdowns = document.querySelectorAll('.dropdown > a');
         
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
@@ -858,8 +1127,26 @@
                 '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
         
+        // Dropdown toggle for mobile
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    const parent = dropdown.parentElement;
+                    parent.classList.toggle('active');
+                    
+                    // Close other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.parentElement.classList.remove('active');
+                        }
+                    });
+                }
+            });
+        });
+        
         // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
+        document.querySelectorAll('.nav-links a:not(.dropdown > a)').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth <= 992) {
                     navLinks.classList.remove('active');
